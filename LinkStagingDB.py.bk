@@ -1,0 +1,20 @@
+import time
+import boto3
+import botocore
+import datetime
+import fnmatch
+import os
+import re
+import socket
+
+Today = datetime.datetime.now().strftime("%y-%m-%d")
+Weekly = datetime.timedelta(weeks=1)
+
+def main():
+    db_identifier = 'wowhead-mysql-staging-%s' %Today
+    rds = boto3.client('rds', region_name='us-east-1')
+    rds.describe_db_instances(DBInstanceIdentifier=db_identifier)
+
+if __name__ == '__main__':
+    main()
+
