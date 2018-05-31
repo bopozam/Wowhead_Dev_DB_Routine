@@ -54,9 +54,9 @@ def main():
             print 'DB instance ready with IP: %s' % node
 
 ## Route 53 ##
-	host_id = 'Z174UMT6MD8IR8'
-	print 'Route53 host ID for mysql.wowhead.com.: %s' % host_id	
 	route53 = boto3.client('route53', region_name='us-east-1')
+	host_id = route53.get_hosted_zone(id='Z174UMT6MD8IR8')
+	print 'Route53 host ID for mysql.wowhead.com.: host_id'
 	changeIP = route53.change_resource_record_sets({"HostedZoneId":host_id,"ChangeBatch":{"Changes":[{"Action":"UPSERT","ResourceRecordSet":{"Name":"devdb.mysql.wowhead.com.","Type":"A","ResourceRecords":[{"Value":node}]}}]}})
 	
 
