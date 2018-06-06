@@ -15,7 +15,10 @@ Weekly = datetime.timedelta(weeks=1)
 def main():
     db_identifier = 'wowhead-mysql-staging-%s' %Today
     rds = boto3.client('rds', region_name='us-east-1')
-
+	route53 = boto3.client('route53', region_name='us-east-1')
+	zone_id = '/hostedzone/Z174UMT6MD8IR8'
+	#boto3.set_stream_logger('botocore')
+	
     running = True
     while running:
         response = rds.describe_db_instances(DBInstanceIdentifier=db_identifier)
@@ -54,39 +57,28 @@ def main():
             print 'DB instance ready with IP: %s' % node
 
 ## Route 53 ##
-	route53 = boto3.client('route53', region_name='us-east-1')
-	zone_id = '/hostedzone/Z174UMT6MD8IR8'
-	#boto3.set_stream_logger('botocore')
-	print 'Route53 host ID for mysql.wowhead.com.: %s' % zone_id
+		print 'Route53 host ID for mysql.wowhead.com.: %s' % zone_id
 	
-	changeIP = route53.change_resource_record_sets(
-		HostedZoneId=zone_id,
-		ChangeBatch={
-			'Changes': [
-				{
-					'Action': 'UPSERT',
-					'ResourceRecordSet': {
-						'Name': 'devdb.mysql.wowhead.com.',
-						'Type': 'A',
-						'ResourceRecords': [
-							{
-								'Value':node
-							}
-						]
+		changeIP = route53.change_resource_record_sets(
+			HostedZoneId=zone_id,
+			ChangeBatch={
+				'Changes': [
+					{
+						'Action': 'UPSERT',
+						'ResourceRecordSet': {
+							'Name': 'devdb.mysql.wowhead.com.',
+							'Type': 'A',
+							'ResourceRecords': [
+								{
+									'Value':node
+								}
+							]
+						}
 					}
-				}
-			]
-		}
-	)
+				]
+			}
+		)
 	
-
-
-
-
-
-
-
-
         running = False
 
 
