@@ -58,26 +58,26 @@ def main():
 
 ## Route 53 ##
 	print 'Route53 host ID for mysql.wowhead.com.: %s' % zone_id
-	
-		changeIP = route53.change_resource_record_sets(
-			HostedZoneId=zone_id,
-			ChangeBatch={
-				'Changes': [
-					{
-						'Action': 'UPSERT',
-						'ResourceRecordSet': {
-							'Name': 'devdb.mysql.wowhead.com.',
-							'Type': 'A',
-							'ResourceRecords': [
-								{
-									'Value':node
-								}
-							]
-						}
+
+	changeIP = route53.change_resource_record_sets(
+		HostedZoneId=zone_id,
+		ChangeBatch={
+			'Changes': [
+				{
+					'Action': 'UPSERT',
+					'ResourceRecordSet': {
+						'Name': 'devdb.mysql.wowhead.com.',
+						'Type': 'A',
+						'ResourceRecords': [
+							{
+								'Value':node
+							}
+						]
 					}
-				]
-			}
-		)
+				}
+			]
+		}
+	)
 	
         running = False
 
