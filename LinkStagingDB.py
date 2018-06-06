@@ -56,6 +56,7 @@ def main():
 ## Route 53 ##
 	route53 = boto3.client('route53', region_name='us-east-1')
 	zone_id = '/hostedzone/Z174UMT6MD8IR8'
+	boto3.set_stream_logger('botocore')
 	print 'Route53 host ID for mysql.wowhead.com.: host_id'
 	changeIP = route53.change_resource_record_sets(
 		"HostedZoneId"=zone_id,
