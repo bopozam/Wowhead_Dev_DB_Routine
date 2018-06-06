@@ -68,6 +68,7 @@ def main():
 					'ResourceRecordSet': {
 						'Name': 'devdb.mysql.wowhead.com.',
 						'Type': 'A',
+						'TTL': 900,
 						'ResourceRecords': [
 							{
 								'Value': '%s' % node
