@@ -70,7 +70,7 @@ def main():
 						'Type': 'A',
 						'ResourceRecords': [
 							{
-								'Value':node
+								'Value': '%s' % node
 							}
 						]
 					}
