@@ -9,7 +9,7 @@ import re
 import socket
 
 
-Today = datetime.datetime.now().strftime("%y-%m-%d")
+Today = datetime.datetime.now().strftime('%y-%m-%d')
 Weekly = datetime.timedelta(weeks=1)
 
 def main():
@@ -58,18 +58,19 @@ def main():
 	zone_id = '/hostedzone/Z174UMT6MD8IR8'
 	boto3.set_stream_logger('botocore')
 	print 'Route53 host ID for mysql.wowhead.com.: host_id'
+	
 	changeIP = route53.change_resource_record_sets(
-		"HostedZoneId"=zone_id,
-		"ChangeBatch"={
-			"Changes": [
+		HostedZoneId=zone_id,
+		ChangeBatch={
+			'Changes': [
 				{
-					"Action": "UPSERT",
-					"ResourceRecordSet": {
-						"Name": "devdb.mysql.wowhead.com.",
-						"Type": "A",
-						"ResourceRecords": [
+					'Action': 'UPSERT',
+					'ResourceRecordSet': {
+						'Name': 'devdb.mysql.wowhead.com.',
+						'Type': 'A',
+						'ResourceRecords': [
 							{
-								"Value":node
+								'Value':node
 							}
 						]
 					}
