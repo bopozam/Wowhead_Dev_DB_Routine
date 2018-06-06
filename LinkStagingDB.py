@@ -80,6 +80,8 @@ def main():
 		}
 	)
 	
+	print changeIP
+	
         running = False
 
 
