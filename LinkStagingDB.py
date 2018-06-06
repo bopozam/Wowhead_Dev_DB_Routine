@@ -57,7 +57,7 @@ def main():
             print 'DB instance ready with IP: %s' % node
 
 ## Route 53 ##
-		print 'Route53 host ID for mysql.wowhead.com.: %s' % zone_id
+	print 'Route53 host ID for mysql.wowhead.com.: %s' % zone_id
 	
 		changeIP = route53.change_resource_record_sets(
 			HostedZoneId=zone_id,
