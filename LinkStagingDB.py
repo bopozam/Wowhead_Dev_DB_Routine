@@ -17,7 +17,7 @@ route53 = boto3.client('route53', region_name='us-east-1')
 zone_id = '/hostedzone/Z174UMT6MD8IR8'
 #boto3.set_stream_logger('botocore')
 
-def main():
+def dnsLink():
 	
     running = True
     while running:
@@ -76,11 +76,9 @@ def main():
 		}
 	)
 	
-	print changeIP
 	
         running = False
 
 
-if __name__ == '__main__':
-    main()
-
+if __name__ == '__dnsLink__':
+    dnsLink()
