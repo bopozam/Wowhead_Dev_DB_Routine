@@ -48,18 +48,14 @@ def main():
                 ip_addr = re.sub(r'::+', '::', ip_addr)
             node = ip_addr
  
-#	    for result in ais:
-#		ip_list.append(result[-1][0])
-#	    ip_list = list(set(ip_list))
-
-
             print 'DB instance ready with host: %s' % host
             print 'DB instance ready with IP: %s' % node
 
 ## Route 53 ##
 	print 'Route53 host ID for mysql.wowhead.com.: %s' % zone_id
 
-	changeIP = route53.change_resource_record_sets(
+	#changeIP = route53.change_resource_record_sets(
+	route53.change_resource_record_sets(
 		HostedZoneId=zone_id,
 		ChangeBatch={
 			'Changes': [
