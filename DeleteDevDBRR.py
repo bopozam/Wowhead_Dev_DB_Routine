@@ -16,8 +16,8 @@ route53 = boto3.client('route53', region_name='us-east-1')
 zone_id = '/hostedzone/Z174UMT6MD8IR8'
 #boto3.set_stream_logger('botocore')
 BeforeToday = datetime.datetime.now() - datetime.timedelta(days=1)
-
 Yesterday = datetime.datetime.now() - 60*60*24
+
 if fileCreation < twodays_ago:
     print "File is more than two days old"
 
