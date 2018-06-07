@@ -54,10 +54,11 @@ def main():
             print 'DB instance ready with host: %s' % host
             running = False
 
+#Promote
     db_identifier = 'wowhead-mysql-staging-%s' %Today
     rds = boto3.client('rds', region_name='us-east-1')
     try:
-        rds.promote_read_replica(DBInstanceIdentifier=db_identifier,)
+        rds.promote_read_replica(DBInstanceIdentifier=db_identifier,BackupRetentionPeriod=0)
         print 'Promoting RDS Read Replica instance with ID: %s' % db_identifier
     except botocore.exceptions.ClientError as e:
         if 'InvalidDBInstanceState' in e.message:
