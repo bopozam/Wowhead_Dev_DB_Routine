@@ -40,6 +40,8 @@ def all_rds_instances(config):
             this_instance = pool.pop()
             yield this_instance
 
+for instance in all_rds_instances({"region": "eu-east-1"}):
+    print instance["InstanceCreateTime"]["Address"]
 
 # def delete():
 #     rds = boto3.client('rds', region_name='us-east-1')
