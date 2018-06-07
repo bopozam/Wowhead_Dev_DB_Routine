@@ -92,6 +92,8 @@ def main():
             running = False
 	
     running = True
+
+#DNS Link    
     while running:
         response = rds.describe_db_instances(DBInstanceIdentifier=db_identifier)
 
@@ -151,6 +153,7 @@ def main():
 	
         running = False
 
+#Delete - Coming soon to a script near you
 
 if __name__ == '__main__':
     main()
