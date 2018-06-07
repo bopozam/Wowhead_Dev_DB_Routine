@@ -37,7 +37,7 @@ def main():
 
         db_instances = response['DBInstances']
         if len(db_instances) != 1:
-            raise Exception('Whoa cowboy! More than one DB instance returned; this should never happen')
+            raise Exception('More than one DB instance returned; this should never happen')
 
         db_instance = db_instances[0]
 
@@ -77,7 +77,7 @@ def promote():
 
         db_instances = response['DBInstances']
         if len(db_instances) != 1:
-            raise Exception('Whoa cowboy! More than one DB instance returned; this should never happen')
+            raise Exception('More than one DB instance returned; this should never happen')
 
         db_instance = db_instances[0]
 
@@ -92,6 +92,7 @@ def promote():
             # port = endpoint['Port']
 
             print 'DB instance ready with host: %s' % host
+            rds.modify_db_instance(DBParameterGroupName='wowhead-staging')
             running = False
 
 
@@ -106,7 +107,7 @@ def dnsLink():
 
         db_instances = response['DBInstances']
         if len(db_instances) != 1:
-            raise Exception('Whoa cowboy! More than one DB instance returned; this should never happen')
+            raise Exception('More than one DB instance returned; this should never happen')
 
         db_instance = db_instances[0]
 
