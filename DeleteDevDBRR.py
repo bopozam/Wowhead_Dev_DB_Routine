@@ -11,13 +11,24 @@ Today = datetime.datetime.now().strftime("%y-%m-%d")
 TimeDelta = datetime.timedelta(days=5)
 BeforeToday = datetime.datetime.now() - datetime.timedelta(days=1)
 
+Yesterday = Today - 60*60*24
+if fileCreation < twodays_ago:
+    print "File is more than two days old"
+
 def main():
     db_identifier = 'wowhead-mysql-staging-%s' %BeforeToday.strftime("%y-%m-%d")
     rds = boto3.client('rds', region_name='us-east-1')
+    instances = rds.get_all_dbinstances.all()
+
     try:
-        ###rds.create_db_instance_read_replica(DBInstanceIdentifier=db_identifier,
-	###		       SourceDBInstanceIdentifier='wowhead-mysql-prod01',
-    	###		       DBInstanceClass='db.t2.small',)
+	for instance in rds.get_all_dbinstances():
+		print instance.id	#Prints all existing instances#
+		if instance.id =< db_identifier
+			print db_identifier
+
+	if db_identifier < Yesterday;
+		print db_identifier "is older"
+        ###rds.delete_db_instance(DBInstanceIdentifier='wowhead-mysql-staging-18-05-30', SkipFinalSnapshot=True)
         print 'Deleting RDS Read Replica instance with ID: %s' % db_identifier
     except botocore.exceptions.ClientError as e:
         if 'DBInstanceAlreadyExists' in e.message:
