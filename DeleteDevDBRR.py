@@ -32,7 +32,7 @@ def all_rds_instances(config):
             if marker is None:
                 break
             # populate a local pool of instances
-            result = rds.describe_db_instances(MaxRecords=page_size, Marker=marker)
+            result = rds.describe_db_instances(MaxRecords=100, Marker=marker)
             marker = result.get("Marker")
             pool = result.get("DBInstances")
 
