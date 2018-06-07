@@ -87,7 +87,7 @@ def main():
             host = endpoint['Address']
             # port = endpoint['Port']
 
-            print 'DB instance ready with host: %s' % host
+            print 'Modifying Parameter Group to wowhead-staging'
             rds.modify_db_instance(DBInstanceIdentifier=db_identifier,DBParameterGroupName='wowhead-staging')
             running = False
 	
