@@ -16,29 +16,25 @@ route53 = boto3.client('route53', region_name='us-east-1')
 zone_id = '/hostedzone/Z174UMT6MD8IR8'
 #boto3.set_stream_logger('botocore')
 
-def all_rds_instances(config):
+def all_rds_instances(region, page_size=20):
     """
     Gets all the RDS instances in a generator (lazy iterator) so you can implement it as:
-    `for instance in all_rds_instances(config):`
+    `for instance in all_rds_instances(region):`
+
+    page_size [explain what this does] should be bound between 20 and 100.
     """
+    client = boto3.client('rds', region_name=region)
     marker = ""
-    rds = boto3.client('rds', region_name=config["region"])
     pool = []
-
-    # min 20, max 100
-    page_size = 20
     while True:
-        if len(pool) < 1:
-            if marker is None:
-                break
-            # populate a local pool of instances
-            result = rds.describe_db_instances(MaxRecords=100, Marker=marker)
-            marker = result.get("Marker")
-            pool = result.get("DBInstances")
+        for instance in pool:
+            yield instance
 
-        if len(pool) > 0:
-            this_instance = pool.pop()
-            yield this_instance
+        if marker is None:
+            break
+        result = client.describe_db_instances(MaxRecords=page_size, Marker=marker)
+        marker = result.get("Marker")
+        pool = result.get("DBInstances")
 
 for instance in all_rds_instances({"region": "eu-east-1"}):
     print instance["InstanceCreateTime"]["Address"]
