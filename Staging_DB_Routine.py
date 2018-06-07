@@ -54,11 +54,6 @@ def main():
             print 'DB instance ready with host: %s' % host
             running = False
 
-
-if __name__ == '__main__':
-    main()
-
-def promote():
     db_identifier = 'wowhead-mysql-staging-%s' %Today
     rds = boto3.client('rds', region_name='us-east-1')
     try:
@@ -94,12 +89,6 @@ def promote():
             print 'DB instance ready with host: %s' % host
             rds.modify_db_instance(DBParameterGroupName='wowhead-staging')
             running = False
-
-
-if __name__ == '__promote__':
-    promote()
-
-def dnsLink():
 	
     running = True
     while running:
@@ -162,5 +151,5 @@ def dnsLink():
         running = False
 
 
-if __name__ == '__dnsLink__':
-    dnsLink()
+if __name__ == '__main__':
+    main()
