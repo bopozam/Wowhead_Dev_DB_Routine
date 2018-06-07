@@ -18,30 +18,74 @@ zone_id = '/hostedzone/Z174UMT6MD8IR8'
 BeforeToday = datetime.datetime.now() - datetime.timedelta(days=1)
 Yesterday = datetime.datetime.now() - 60*60*24
 
-if fileCreation < twodays_ago:
-    print "File is more than two days old"
+def all_rds_instances(config):
+    """
+    Gets all the RDS instances in a generator (lazy iterator) so you can implement it as:
+    `for instance in all_rds_instances(config):`
+    """
+    marker = ""
+    rds = boto3.client('rds', region_name=config["region"])
+    pool = []
 
-def delete():
-    db_identifier = 'wowhead-mysql-staging-%s' %BeforeToday.strftime("%y-%m-%d")
-    rds = boto3.client('rds', region_name='us-east-1')
-    instances = rds.get_all_dbinstances.all()
+    # min 20, max 100
+    page_size = 20
+    while True:
+        if len(pool) < 1:
+            if marker is None:
+                break
+            # populate a local pool of instances
+            result = rds.describe_db_instances(MaxRecords=page_size, Marker=marker)
+            marker = result.get("Marker")
+            pool = result.get("DBInstances")
 
-    try:
-	for instance in rds.get_all_dbinstances():
-		print instance.id	#Prints all existing instances#
+        if len(pool) > 0:
+            this_instance = pool.pop()
+            yield this_instance
 
-	if db_identifier < Yesterday;
-		print db_identifier "is older"
-        ###rds.delete_db_instance(DBInstanceIdentifier='wowhead-mysql-staging-18-05-30', SkipFinalSnapshot=True)
-        print 'Deleting RDS Read Replica instance with ID: %s' % db_identifier
-    except botocore.exceptions.ClientError as e:
-        if 'DBInstanceAlreadyExists' in e.message:
-            print 'DB instance %s exists already, continuing to poll ...' % db_identifier
-        elif 'InvalidParameterValue' in e.message:
-            print 'DB instance %s does not exist, continuing to poll ...' % db_identifier
-        else:
-            raise
 
-if __name__ == '__delete__':
-    delete()
-
+# def delete():
+#     rds = boto3.client('rds', region_name='us-east-1')
+# 	
+#     
+#     try:
+#     	old_instance = rds.describe_db_instances(DBInstanceIdentifier='wowhead-mysql-staging-'.)
+#     	db_instances = old_instance['DBInstances']
+#     	db_instance = db_instances[0]
+#     	
+# 		InstanceCreateTime = db_instance['InstanceCreateTime']
+# 		
+#         print 'Creating RDS Read Replica instance with ID: %s' % db_identifier
+#     except botocore.exceptions.ClientError as e:
+#         if 'DBInstanceAlreadyExists' in e.message:
+#             print 'DB instance %s exists already, continuing to poll ...' % db_identifier
+#         else:
+#             raise
+# 
+# 
+#     running = True
+#     while running:
+#         response = rds.describe_db_instances(DBInstanceIdentifier=db_identifier)
+# 
+#         db_instances = response['DBInstances']
+#         if len(db_instances) != 1:
+#             raise Exception('More than one DB instance returned; this should never happen')
+# 
+#         db_instance = db_instances[0]
+# 
+#         status = db_instance['DBInstanceStatus']
+# 
+#         print 'Last DB status: %s' % status
+# 
+#         time.sleep(5)
+#         if status == 'available':
+#             endpoint = db_instance['Endpoint']
+#             host = endpoint['Address']
+#             # port = endpoint['Port']
+# 
+# #             print 'DB instance ready with host: %s' % host
+#             running = False
+# 
+# 
+# if __name__ == '__delete__':
+#     delete()
+# 
