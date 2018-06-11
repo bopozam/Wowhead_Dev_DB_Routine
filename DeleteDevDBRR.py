@@ -31,7 +31,7 @@ def all_rds_instances(region, page_size=20):
 
         if marker is None:
             break
-        result = rds.describe_db_instances(Filters=[{"Name": "DBInstanceIdentifier","Values": ["wowhead-mysql-staging*"] MaxRecords=100, Marker=marker)
+        result = rds.describe_db_instances(Filters=[{"Name": "DBInstanceIdentifier","Values": ["wowhead-mysql-staging*"]},], MaxRecords=100, Marker=marker)
         marker = result.get("Marker")
         pool = result.get("DBInstances")
 
