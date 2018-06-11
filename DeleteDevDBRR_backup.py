@@ -49,7 +49,7 @@ except Exception as error:
 	print error
 
 for db in dbs['DBInstances']:
-	create_time = datetime.strptime(
+	create_time = datetime.strftime(
 		(db['InstanceCreateTime']),
 		'%y-%m-%d'
 	)
