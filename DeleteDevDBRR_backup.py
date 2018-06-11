@@ -51,12 +51,12 @@ except Exception as error:
 for db in dbs['DBInstances']:
 	create_time = db['InstanceCreateTime'].strftime('%y-%m-%d')
 
-	if create_time < delete_time:
+	if create_time < Today:
 		print 'Deleting {id}'.format(id=instance.id)
 		deletion_counter = deletion_counter + 1
 		size_counter = size_counter + instance.volume_size
 		# Just to make sure you're reading!
-		instance.delete(dry_run=True)
+		# instance.delete(dry_run=True)
 
 print 'Deleted {number} instances totalling {size} GB'.format(
 	number=deletion_counter,
