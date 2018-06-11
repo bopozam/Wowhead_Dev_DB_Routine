@@ -40,7 +40,7 @@ dbs = rds.describe_db_instances()
 deletion_counter = 0
 size_counter = 0
 
-# try:
+try:
 # get all of the db instances
     dbs = rds.describe_db_instances()
     for db in dbs['DBInstances']:
@@ -53,7 +53,7 @@ for ct in dbs['DBInstances']:
 	create_time = ct['InstanceCreateTime'].strftime('%y-%m-%d')
 
 	if create_time < Today:
-		print 'Deleting (db['DBInstanceIdentifier'])'
+		print 'Deleting (db['DBInstanceIdentifier'])
 		deletion_counter = deletion_counter + 1
 		# Just to make sure you're reading!
 		# instance.delete(dry_run=True)
