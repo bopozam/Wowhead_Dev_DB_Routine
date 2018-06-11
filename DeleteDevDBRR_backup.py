@@ -54,11 +54,9 @@ for ct in dbs['DBInstances']:
 	if create_time < Today:
 		print 'Deleting {id}'.format(id=(db['DBInstanceIdentifier']))
 		deletion_counter = deletion_counter + 1
-		size_counter = size_counter + instance.volume_size
 		# Just to make sure you're reading!
 		# instance.delete(dry_run=True)
 
-print 'Deleted {number} instances totalling {size} GB'.format(
+print 'Deleted {number} instances'.format(
 	number=deletion_counter,
-	size=size_counter
 )
