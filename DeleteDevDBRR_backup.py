@@ -49,10 +49,7 @@ except Exception as error:
 	print error
 
 for db in dbs['DBInstances']:
-	create_time = datetime.strftime(
-		(db['InstanceCreateTime']),
-		'%y-%m-%d'
-	)
+	create_time = db['InstanceCreateTime'].strftime('%y-%m-%d')
 
 	if create_time < delete_time:
 		print 'Deleting {id}'.format(id=instance.id)
