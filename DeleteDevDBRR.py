@@ -20,7 +20,6 @@ try:
 # get all of the db instances
     dbs = rds.describe_db_instances()
     for db in dbs['DBInstances']:
-        print ("%s %s") % (
-            db['DBInstanceIdentifier'])
+        print (db['DBInstanceIdentifier'])
 except Exception as error:
 	print error
