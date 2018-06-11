@@ -29,7 +29,7 @@ except IndexError:
 delete_time = datetime.utcnow() - timedelta(days=days)
 
 filters = {
-	'db-instance-id': 'wowhead-mysql-staging'
+	'dict': 'wowhead-mysql-staging'
 }
 
 print 'Deleting any instances older than {days} days'.format(days=days)
