@@ -20,6 +20,7 @@ def main():
     db_identifier = 'wowhead-mysql-staging-%s' %Today
     rds = boto3.client('rds', region_name='us-east-1')
     try:
+#Create    
         rds.create_db_instance_read_replica(DBInstanceIdentifier=db_identifier,
 			       SourceDBInstanceIdentifier='wowhead-mysql-prod01',
     			       DBInstanceClass='db.t2.small',)
@@ -66,7 +67,6 @@ def main():
         else:
             raise
 
-
     running = True
     while running:
         response = rds.describe_db_instances(DBInstanceIdentifier=db_identifier)
@@ -85,15 +85,12 @@ def main():
         if status == 'available':
             endpoint = db_instance['Endpoint']
             host = endpoint['Address']
-            # port = endpoint['Port']
-
             print 'Modifying Parameter Group to wowhead-staging'
             rds.modify_db_instance(DBInstanceIdentifier=db_identifier,DBParameterGroupName='wowhead-staging')
             running = False
-	
-    running = True
 
-#DNS Link    
+#DNS Link    	
+    running = True
     while running:
         response = rds.describe_db_instances(DBInstanceIdentifier=db_identifier)
 
@@ -150,10 +147,32 @@ def main():
 		}
 	)
 	
-	
+#Delete - Coming soon to a script near you sdfjaiosjdfoij
+
+    running = True
+    while running:
+    	dbs = rds.describe_db_instances()
+    	for db in dbs['DBInstances']:
+			if dbs['DBInstances'] == "wowhead-mysql-staging-*":
+				print (db['DBInstanceIdentifier'])
+	except Exception as error:
+		print error
+
+	for ct in dbs['DBInstances']:
+		create_time = ct['InstanceCreateTime'].strftime('%y-%m-%d')
+
+		if create_time < Today:
+			print 'Deleting (db['DBInstanceIdentifier'])
+			deletion_counter = deletion_counter + 1
+			# Just to make sure you're reading!
+			# instance.delete(dry_run=True)
+
+	print 'Deleted {number} instances'.format(
+		number=deletion_counter,
+	)
+
         running = False
 
-#Delete - Coming soon to a script near you
 
 if __name__ == '__main__':
     main()
