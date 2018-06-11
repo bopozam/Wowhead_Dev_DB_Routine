@@ -44,13 +44,13 @@ try:
 # get all of the db instances
     dbs = rds.describe_db_instances()
     for db in dbs['DBInstances']:
-        print (db['InstanceCreateTime']).strftime('%y-%m-%d')
+        print (db['DBInstanceIdentifier'])
 except Exception as error:
 	print error
 
 for db in dbs:
-	create_time = datetime.strftime(
-		db['InstanceCreateTime'],
+	create_time = datetime.strptime(
+		(db['DBInstanceIdentifier']),
 		'%y-%m-%d'
 	)
 
