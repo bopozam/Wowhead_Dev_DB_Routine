@@ -28,25 +28,27 @@ except IndexError:
 
 delete_time = datetime.utcnow() - timedelta(days=days)
 
-filters = {
-	'DescribeDBInstances': 'wowhead-mysql-staging'
-}
+# filters = [{
+# 	'DescribeDBInstances': 'wowhead-mysql-staging'
+# }]
 
 print 'Deleting any instances older than {days} days'.format(days=days)
 
-instances = rds.describe_db_instances(Filters=filters)
+# instances = rds.describe_db_instances(Filters=filters)
+dbs = rds.describe_db_instances()
 
 deletion_counter = 0
 size_counter = 0
 
-# for db in instances['DBInstances']:
-#         print (db['DBInstanceIdentifier'])
-# except Exception as error:
-# 	print error
 
-for InstanceCreateTime in instances:
+for db in dbs['DBInstances']:
+        print (db['DBInstanceIdentifier'])
+except Exception as error:
+	print error
+
+for db in dbs:
 	create_time = datetime.strptime(
-		instance.InstanceCreateTime,
+		db.InstanceCreateTime,
 		'%y-%m-%d'
 	)
 
