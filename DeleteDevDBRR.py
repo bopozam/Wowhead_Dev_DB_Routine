@@ -22,8 +22,6 @@ try:
     for db in dbs['DBInstances']:
         print ("%s %s") % (
             db['DBInstanceIdentifier'],
-#             db['Endpoint']['Address'],
-#             db['Endpoint']['Port'],
-             db['DBInstanceStatus'])
+            db['DBInstanceStatus'])
 except Exception as error:
 	print error
