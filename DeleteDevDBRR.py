@@ -21,7 +21,6 @@ try:
     dbs = rds.describe_db_instances()
     for db in dbs['DBInstances']:
         print ("%s %s") % (
-            db['DBInstanceIdentifier'],
-            db['DBInstanceStatus'])
+            db['DBInstanceIdentifier'])
 except Exception as error:
 	print error
