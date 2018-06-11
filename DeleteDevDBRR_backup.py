@@ -48,7 +48,7 @@ try:
 except Exception as error:
 	print error
 
-for db in dbs:
+for db in dbs['DBInstances']:
 	create_time = datetime.strptime(
 		(dbs.InstanceCreateTime),
 		'%y-%m-%d'
