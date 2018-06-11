@@ -46,10 +46,10 @@ size_counter = 0
 
 for instance in instances:
 	print instance
-	create_time = datetime.strptime(
-		instance.InstanceCreateTime,
-		'%y-%m-%d'
-	)
+# 	create_time = datetime.strptime(
+# 		instance.InstanceCreateTime,
+# 		'%y-%m-%d'
+# 	)
 
 	if create_time < delete_time:
 		print 'Deleting {id}'.format(id=instance.id)
