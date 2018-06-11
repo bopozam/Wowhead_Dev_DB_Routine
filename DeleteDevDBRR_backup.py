@@ -44,12 +44,11 @@ size_counter = 0
 # except Exception as error:
 # 	print error
 
-for instance in instances:
-	print instance
-# 	create_time = datetime.strptime(
-# 		instance.InstanceCreateTime,
-# 		'%y-%m-%d'
-# 	)
+for InstanceCreateTime in instances:
+	create_time = datetime.strptime(
+		instance.InstanceCreateTime,
+		'%y-%m-%d'
+	)
 
 	if create_time < delete_time:
 		print 'Deleting {id}'.format(id=instance.id)
