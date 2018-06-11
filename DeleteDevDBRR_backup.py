@@ -44,8 +44,7 @@ try:
 # get all of the db instances
     dbs = rds.describe_db_instances()
     for db in dbs['DBInstances']:
-    	if dbs['DBInstances'] == "wowhead-mysql-staging-*":
-	        print (db['DBInstanceIdentifier'])
+        print (db['DBInstanceIdentifier'])
 except Exception as error:
 	print error
 
@@ -53,12 +52,13 @@ for ct in dbs['DBInstances']:
 	create_time = ct['InstanceCreateTime'].strftime('%y-%m-%d')
 
 	if create_time < Today:
-		print 'Deleting (db['DBInstanceIdentifier'])
+		print 'Deleting {id}'.format(id=db.id)
 		deletion_counter = deletion_counter + 1
+		size_counter = size_counter + instance.volume_size
 		# Just to make sure you're reading!
 		# instance.delete(dry_run=True)
 
-print 'Deleted {number} instances'.format(
+print 'Deleted {number} instances totalling {size} GB'.format(
 	number=deletion_counter,
+	size=size_counter
 )
-
