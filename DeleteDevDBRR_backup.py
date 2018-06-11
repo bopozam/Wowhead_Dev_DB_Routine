@@ -45,6 +45,7 @@ size_counter = 0
 # 	print error
 
 for instance in instances:
+	print instance
 	create_time = datetime.strptime(
 		instance.InstanceCreateTime,
 		'%y-%m-%d'
