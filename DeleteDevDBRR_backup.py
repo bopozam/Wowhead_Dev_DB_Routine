@@ -41,7 +41,9 @@ deletion_counter = 0
 size_counter = 0
 
 try:
-	for db in dbs['DBInstances']:
+# get all of the db instances
+    dbs = rds.describe_db_instances()
+    for db in dbs['DBInstances']:
         print (db['DBInstanceIdentifier'])
 except Exception as error:
 	print error
