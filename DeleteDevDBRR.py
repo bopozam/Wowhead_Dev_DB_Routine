@@ -36,8 +36,8 @@ def all_rds_instances(region, page_size=20):
         marker = result.get("Marker")
         pool = result.get("DBInstances")
 
-for instance in all_rds_instances({"region": "eu-east-1"}):
-    print instance["InstanceCreateTime"]["Address"]
+for instance in all_rds_instances({"region": "eu-west-1"}):
+    print instance["Endpoint"]["Address"]
 
 # def delete():
 #     rds = boto3.client('rds', region_name='us-east-1')
