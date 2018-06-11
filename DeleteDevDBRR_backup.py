@@ -50,7 +50,7 @@ except Exception as error:
 
 for db in dbs['DBInstances']:
 	create_time = datetime.strptime(
-		(dbs.InstanceCreateTime),
+		(db['InstanceCreateTime']),
 		'%y-%m-%d'
 	)
 
