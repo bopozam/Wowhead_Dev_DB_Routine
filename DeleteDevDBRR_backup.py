@@ -34,7 +34,7 @@ filters = {
 
 print 'Deleting any instances older than {days} days'.format(days=days)
 
-instances = rds.describe_db_instances()
+instances = rds.describe_db_instances(Filters=filters)
 
 deletion_counter = 0
 size_counter = 0
