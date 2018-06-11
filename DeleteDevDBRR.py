@@ -36,5 +36,5 @@ def all_rds_instances(region, page_size=20):
         pool = result.get("DBInstances")
 
 for instance in all_rds_instances({"region": "us-east-1"}):
-    print instance["DBInstanceIdentifier"]["InstanceCreateTime"]
+    print instance["DBInstances"]["DBInstanceIdentifier"]
 
