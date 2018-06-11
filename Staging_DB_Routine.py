@@ -155,8 +155,8 @@ def main():
     	for db in dbs['DBInstances']:
 			if dbs['DBInstances'] == "wowhead-mysql-staging-*":
 				print (db['DBInstanceIdentifier'])
-except Exception as error:
-		print error
+		except Exception as error:
+			print error
 
 	for ct in dbs['DBInstances']:
 		create_time = ct['InstanceCreateTime'].strftime('%y-%m-%d')
