@@ -44,6 +44,7 @@ try:
 # get all of the db instances
     dbs = rds.describe_db_instances()
     for db in dbs['DBInstances']:
+    	if dbs['DBInstances'] = "wowhead-mysql-staging-*"
         print (db['DBInstanceIdentifier'])
 except Exception as error:
 	print error
