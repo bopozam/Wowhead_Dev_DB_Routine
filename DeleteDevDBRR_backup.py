@@ -35,7 +35,7 @@ delete_time = datetime.utcnow() - timedelta(days=days)
 print 'Deleting any instances older than {days} days'.format(days=days)
 
 # instances = rds.describe_db_instances(Filters=filters)
-dbs = rds.describe_db_instances('InstanceCreateTime')
+dbs = rds.describe_db_instances()
 
 deletion_counter = 0
 size_counter = 0
@@ -50,7 +50,7 @@ except Exception as error:
 
 for db in dbs:
 	create_time = datetime.strptime(
-		(db['DBInstanceIdentifier']),
+		(dbs.InstanceCreateTime),
 		'%y-%m-%d'
 	)
 
