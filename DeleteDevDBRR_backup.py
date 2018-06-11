@@ -39,13 +39,18 @@ instances = rds.describe_db_instances()
 deletion_counter = 0
 size_counter = 0
 
+# for db in instances['DBInstances']:
+#         print (db['DBInstanceIdentifier'])
+# except Exception as error:
+# 	print error
+
 for instance in instances:
-	start_time = datetime.strptime(
-		instance.start_time,
-		'%Y-%m-%dT%H:%M:%S.000Z'
+	create_time = datetime.strptime(
+		instance.InstanceCreateTime,
+		'%y-%m-%d'
 	)
 
-	if start_time < delete_time:
+	if create_time < delete_time:
 		print 'Deleting {id}'.format(id=instance.id)
 		deletion_counter = deletion_counter + 1
 		size_counter = size_counter + instance.volume_size
