@@ -42,9 +42,9 @@ try:
 		create_time = ct['InstanceCreateTime'].strftime('%y-%m-%d')
 		instance = ct['DBInstanceIdentifier']
 
-#if (create_time < delete_time.strftime('%y-%m-%d') and instance == 'wowhead-mysql-staging-*'):
-if create_time < delete_time.strftime('%y-%m-%d') :
-	print 'Deleting %s:' % instance
+	#if (create_time < delete_time.strftime('%y-%m-%d') and instance == 'wowhead-mysql-staging-*'):
+	if create_time < delete_time.strftime('%y-%m-%d') :
+		print 'Deleting %s:' % instance
 
 # try:
 #     response = rds.delete_db_instance(
