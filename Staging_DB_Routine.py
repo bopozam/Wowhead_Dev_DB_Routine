@@ -149,28 +149,6 @@ def main():
 	
 #Delete - Coming soon to a script near you sdfjaiosjdfoij
 
-    running = True
-    while running:
-    	dbs = rds.describe_db_instances()
-    	for db in dbs['DBInstances']:
-			if dbs['DBInstances'] == "wowhead-mysql-staging-*":
-				print (db['DBInstanceIdentifier'])
-		except Exception as error:
-			print error
-
-	for ct in dbs['DBInstances']:
-		create_time = ct['InstanceCreateTime'].strftime('%y-%m-%d')
-
-		if create_time < Today:
-			print 'Deleting (db['DBInstanceIdentifier'])
-			deletion_counter = deletion_counter + 1
-			# Just to make sure you're reading!
-			# instance.delete(dry_run=True)
-
-	print 'Deleted {number} instances'.format(
-		number=deletion_counter,
-	)
-
         running = False
 
 
