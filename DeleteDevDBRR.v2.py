@@ -38,9 +38,9 @@ try:
 		print 'Instance: %s' % db_instance #'was created on: %s' % create_time
 
 
-for ct in dbs['DBInstances']:
-	create_time = ct['InstanceCreateTime'].strftime('%y-%m-%d')
-	instance = ct['DBInstanceIdentifier']
+	for ct in dbs['DBInstances']:
+		create_time = ct['InstanceCreateTime'].strftime('%y-%m-%d')
+		instance = ct['DBInstanceIdentifier']
 
 #if (create_time < delete_time.strftime('%y-%m-%d') and instance == 'wowhead-mysql-staging-*'):
 if create_time < delete_time.strftime('%y-%m-%d') :
