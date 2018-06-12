@@ -34,7 +34,7 @@ try:
 	db_instance = db_instances[0]
 	create_time = db_instance['InstanceCreateTime']
 
-running = True
+	running = True
     while running:
 		for db in dbs['DBInstances']:
 			print 'Instance: %s' % db_instance #'was created on: %s' % create_time
