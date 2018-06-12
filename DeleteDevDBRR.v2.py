@@ -46,6 +46,7 @@ try:
 	if create_time < delete_time.strftime('%y-%m-%d') :
 		print 'Deleting %s:' % instance
 
+
 # try:
 #     response = rds.delete_db_instance(
 #         DBInstanceIdentifier=db,
