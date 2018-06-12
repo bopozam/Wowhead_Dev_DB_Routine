@@ -16,6 +16,8 @@ route53 = boto3.client('route53', region_name='us-east-1')
 zone_id = '/hostedzone/Z174UMT6MD8IR8'
 #boto3.set_stream_logger('botocore')
 
+def del():
+
 try:
 	days = int(sys.argv[1])
 except IndexError:
@@ -56,3 +58,6 @@ try:
 #     print response
 # except Exception as error:
 #     print error
+
+if __name__ == '__del__':
+    del()
