@@ -29,7 +29,7 @@ deletion_counter = 0
 
 try:
 # get all of the db instances
-dbs = rds.describe_db_instances()
+	dbs = rds.describe_db_instances()
 db_instances = dbs['DBInstances']
 db_instance = db_instances[0]
 create_time = db_instance['InstanceCreateTime']
