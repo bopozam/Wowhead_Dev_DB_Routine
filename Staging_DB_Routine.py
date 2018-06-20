@@ -24,7 +24,7 @@ def main():
         rds.create_db_instance_read_replica(DBInstanceIdentifier=db_identifier,
 			       SourceDBInstanceIdentifier='wowhead-mysql-prod01',
     			       DBInstanceClass='db.m4.large',
-    			       Tags=[{'Key' : 'Site','Value' : 'lolking'},{'Key' : 'Name','Value' : db_identifier}])
+    			       Tags=[{'Key' : 'Site','Value' : 'wowhead'},{'Key' : 'Name','Value' : db_identifier}])
         print 'Creating RDS Read Replica instance with ID: %s' % db_identifier
     except botocore.exceptions.ClientError as e:
         if 'DBInstanceAlreadyExists' in e.message:
