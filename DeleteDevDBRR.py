@@ -18,8 +18,10 @@ zone_id = '/hostedzone/Z174UMT6MD8IR8'
 
 try:
 # get all of the db instances
-    dbs = rds.describe_db_instances()
+    dbs = rds.describe_db_instances('DBInstances[?DBInstanceIdentifier!=`null`]|[?starts_with(DBInstanceIdentifier, `wowhead-mysql-staging-`) == `true`])
     for db in dbs['DBInstances']:
         print (db['DBInstanceIdentifier'])
 except Exception as error:
 	print error
+
+# aws rds describe-db-instances --query 'DBInstances[?DBInstanceIdentifier!=`null`]|[?starts_with(DBInstanceIdentifier, `wowhead-mysql-staging-`) == `true`].[DBInstanceIdentifier,InstanceCreateTime]' --output text
