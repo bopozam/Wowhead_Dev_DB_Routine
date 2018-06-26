@@ -16,8 +16,6 @@ route53 = boto3.client('route53', region_name='us-east-1')
 zone_id = '/hostedzone/Z174UMT6MD8IR8'
 #boto3.set_stream_logger('botocore')
 
-def del():
-
 try:
 	days = int(sys.argv[1])
 except IndexError:
@@ -34,12 +32,17 @@ try:
 	dbs = rds.describe_db_instances()
 	db_instances = dbs['DBInstances']
 	db_instance = db_instances[0]
-	create_time = db_instance['InstanceCreateTime']
+	icreate_time = db_instance['InstanceCreateTime']
+	dbid = db_instance['DBInstanceIdentifier']
 
-    running = True
-    while running:
-		for db in dbs['DBInstances']:
-			print 'Instance: %s' % db_instance #'was created on: %s' % create_time
+# aws rds describe-db-instances --query 'DBInstances[?DBInstanceIdentifier!=`null`]|[?starts_with(DBInstanceIdentifier, `wowhead-mysql-staging-`) == `true`].[DBInstanceIdentifier,InstanceCreateTime]' --output text
+
+# for db in dbs['DBInstances']:
+# 	print 'Instance: %s' % db_instance 'was created on: %s' % icreate_time
+# running = True
+# while running:
+for db in dbs['DBInstances']:
+	print 'Instance: %s was created on: %s' % (dbid, icreate_time.strftime('%y-%m-%d'))
 
 
 	for ct in dbs['DBInstances']:
